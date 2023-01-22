@@ -1,9 +1,10 @@
 // Create my TOMOGACHI
 //Evolution system based on level like pokmeon
 //I want a trust system with anger and love
+//User inpupt their own name Tomo 
 
 class Tamagotchi {
-    constructor() {
+    constructor(tomoName) {
       this.level = 1;
       this.hunger = 0;
       this.sleepyness = 0;
@@ -13,5 +14,6 @@ class Tamagotchi {
     }
 }
 
-const myTamagotchi = new Tamagotchi();
-console.log(myTamagotchi);
+let name = prompt("Enter a name for your Tamagotchi:"); // I dont like the interference of the prompt
+let myTamagotchi = new Tamagotchi(tomoName);
+console.log(`Your Tamagotchi's name is ${myTamagotchi.name}`);
