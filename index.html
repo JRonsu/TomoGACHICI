@@ -10,17 +10,25 @@
 </head>
 <body>
 
+    <div id="gotchi-container">
+        <img id="gotchi-sprite" src="TomoGotchi-Sprites/8 Bird 2/Idle.png">
+    </div>
+
     <!-- Make Button to Create a TomoGachi & Name it -->
     <div>
         <label id="label">Annyeong!! Enter a name for your TomoGochi:</label>
         <input type="text" id="name">
-        <button id="create-button" onclick="createTamagotchi()">Create Tamagotchi</button>
-        
+        <button id="create-button" onclick="createTamagotchi()">Create Tamagotchi</button>    
     </div>
 
+    <!-- Make Button to add love -->
     <div>
         <button id="add-love-button" style="display: none;" onclick="gotchiLove()">Add love</button>
-
+    </div>
+    
+    <!-- Make Button to Feed -->
+    <div>
+        <button id="feed-button" style="display: none;" onclick="feed()">Feed</button>
     </div>
 
 </body>

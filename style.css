@@ -1,0 +1,14 @@
+#tamagotchi-container {
+    width: 200px;
+    height: 200px;
+    position: relative;
+    margin: 0 auto;
+}
+
+#tamagotchi-sprite {
+    width: 200px;
+    height: 200px;
+    position: absolute;
+    background-position-x: -25px; /* move the background image 100px to the left */
+    background-position-y: -100px; /* move the background image 100px up */
+}
