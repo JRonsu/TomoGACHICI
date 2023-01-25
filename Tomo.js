@@ -94,6 +94,7 @@ function gotchiLove() {
     document.getElementById("add-love-button").style.display = "block"; // sets the love button to be visible
     document.getElementById("add-love-button").addEventListener("click", () => { //adds a click event listener to the love button
         myTamagotchi.addLove(); // calls the addLove function from the Tamagotchi class
+        updateStats()
     });
 }
 
@@ -103,6 +104,7 @@ function feed() {
     document.getElementById("feed-button").style.display = "block"; // sets the love button to be visible
     document.getElementById("feed-button").addEventListener("click", () => { //adds a click event listener to the feed button
         myTamagotchi.feed(); // calls the feed function from the Tamagotchi class
+        updateStats()
         // I want to add a cooldown to the button 
     });
 }
@@ -111,6 +113,7 @@ function sleep() {
     document.getElementById("sleep-button").style.display = "block"; // sets the sleep button to be visible
     document.getElementById("sleep-button").addEventListener("click", () => { //adds a click event listener to the sleep button
         myTamagotchi.sleep(); // calls the sleep function from the Tamagotchi class
+        updateStats()
         // I want to add a cooldown to the button 
     });
 }
@@ -120,6 +123,15 @@ function play() {
     document.getElementById("play-button").style.display = "block"; // sets the play button to be visible
     document.getElementById("play-button").addEventListener("click", () => { //adds a click event listener to the sleep button
         myTamagotchi.play(); // calls the play function from the Tamagotchi class
+        updateStats()
         // I want to add a cooldown to the button 
     });
+}
+
+
+function updateStats() {
+    document.getElementById("nutrition-value").innerHTML = myTamagotchi.nutrition;
+    document.getElementById("rest-value").innerHTML = myTamagotchi.rest;
+    document.getElementById("boredom-value").innerHTML = myTamagotchi.boredom;
+    document.getElementById("love-value").innerHTML = myTamagotchi.love;
 }
