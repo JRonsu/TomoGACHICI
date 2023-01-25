@@ -34,6 +34,7 @@ class Tamagotchi {
             document.getElementById("add-love-button").style.display = "none";// when its hatched make button disappear
             document.getElementById("feed-button").style.display = "block"; // when its hatched show feed button
             document.getElementById("sleep-button").style.display = "block";
+            document.getElementById("play-button").style.display = "block";
         }
     }
     
@@ -57,6 +58,19 @@ class Tamagotchi {
             console.log("Tamagotchi is already well rested. Rest: " + this.rest);
         }
     }
+
+
+    play() {
+        if (this.nutrition > 20 && this.rest > 20) {
+            this.boredom -= 20;
+            this.nutrition -= 20;
+            this.rest -= 20
+            console.log("Tamagotchi is playing. Boredom: " + this.boredom + " Nutrition: " + this.nutrition + " Rest: " + this.rest);
+        } else if (this.nutrition <= 20 || this.rest <= 20) {
+            console.log("Tamagotchi is too tired to play.");
+        }
+    }
+
 }
 
 
@@ -97,6 +111,15 @@ function sleep() {
     document.getElementById("sleep-button").style.display = "block"; // sets the sleep button to be visible
     document.getElementById("sleep-button").addEventListener("click", () => { //adds a click event listener to the sleep button
         myTamagotchi.sleep(); // calls the sleep function from the Tamagotchi class
+        // I want to add a cooldown to the button 
+    });
+}
+
+
+function play() {
+    document.getElementById("play-button").style.display = "block"; // sets the play button to be visible
+    document.getElementById("play-button").addEventListener("click", () => { //adds a click event listener to the sleep button
+        myTamagotchi.play(); // calls the play function from the Tamagotchi class
         // I want to add a cooldown to the button 
     });
 }
