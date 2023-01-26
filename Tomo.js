@@ -11,7 +11,9 @@ class Tamagotchi {
     constructor(name) {
         // Define the constructor function, which runs when a new Tamagotchi object is created
         this.name = name; // Assign the input name to the 'name' property of the object
-        this.level = 1; // Assign level 1 to the object
+        this.level = 1;
+        this.experience = 0;
+        this.experienceThreshold = 10; // once met level up
         this.nutrition = 40; // Assign 0 to hunger
         this.rest = 0; // Assign 0 to sleepyness
         this.boredom = 50; // Assign 0 to boredom
@@ -48,6 +50,14 @@ class Tamagotchi {
         } else {
             console.log("Tamagotchi is hungry. Nutrition: " + this.nutrition);
         }
+
+        // add Experience to feeding food
+        this.experience += 10;
+        console.log(`${myTamagotchi.name} has gained ${this.experience} experience`)
+        // If you reach the experience threshold you will level up
+        if (this.experience >= this.experienceThreshold) {
+            this.levelUp();
+        }
     }
 
     sleep() {
@@ -56,6 +66,14 @@ class Tamagotchi {
             console.log("Tamagotchi is resting. Rest: " + this.rest);
         } else {
             console.log("Tamagotchi is already well rested. Rest: " + this.rest);
+        }
+
+        // add Experience for sleeping
+        this.experience += 10;
+        console.log(`${myTamagotchi.name} has gained ${this.experience} experience`)
+        // If you reach the experience threshold you will level up
+        if (this.experience >= this.experienceThreshold) {
+            this.levelUp();
         }
     }
 
@@ -69,6 +87,21 @@ class Tamagotchi {
         } else if (this.nutrition <= 20 || this.rest <= 20) {
             console.log("Tamagotchi is too tired to play.");
         }
+
+        // add Experience to for playing
+        this.experience += 10;
+        console.log(`${myTamagotchi.name} has gained ${this.experience} experience`)
+        // If you reach the experience threshold you will level up
+        if (this.experience >= this.experienceThreshold) {
+            this.levelUp();
+        }
+    }
+
+    // leveling mechanic, threshhold will double every time you level up
+    levelUp() {
+        this.level++;
+        this.experienceThreshold *= 2;
+        console.log(`Congratulations, ${this.name} has leveled up to level ${this.level}!`);
     }
 
 }
@@ -93,7 +126,7 @@ function createTamagotchi() {
 function gotchiLove() {
     document.getElementById("add-love-button").style.display = "block"; // sets the love button to be visible
     document.getElementById("add-love-button").addEventListener("click", () => { //adds a click event listener to the love button
-        myTamagotchi.addLove(); // calls the addLove function from the Tamagotchi class
+        myTamagotchi.addLove(); // calls the addLove function from the Tamagotchi class 
         updateStats()
     });
 }
