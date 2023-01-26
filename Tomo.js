@@ -2,7 +2,7 @@
 //Add Evolution system based on level like pokmeon
 // add cooldown to these buttons functions
 // make sleep a loading process -- make it block out all other functions and at intervals go up to 100 until button pressed
-// if nutrition level goes belo 10 5 times the Tomogotchi will run away  
+// if nutrition level goes below 10, 5 times the Tomogotchi will Die 
 // add starting egg photo and switch to sprite after hatches
 
 
@@ -15,8 +15,8 @@ class Tamagotchi {
         this.experience = 0;
         this.experienceThreshold = 10; // once met level up
         this.nutrition = 40; // Assign 0 to hunger
-        this.rest = 0; // Assign 0 to sleepyness
-        this.boredom = 50; // Assign 0 to boredom
+        this.rest = 100; // Assign 0 to sleepyness
+        this.boredom = 100; // Assign 0 to boredom
         this.anger = 0; // Assign 0 to anger
         this.love = 0; // Assign 0 to love
     }
@@ -35,29 +35,51 @@ class Tamagotchi {
             console.log(`Congratulations! Your Tamagotchi ${this.name} is hatched!`);
             document.getElementById("add-love-button").style.display = "none";// when its hatched make button disappear
             document.getElementById("feed-button").style.display = "block"; // when its hatched show feed button
-            document.getElementById("sleep-button").style.display = "block";
-            document.getElementById("play-button").style.display = "block";
+            document.getElementById("sleep-button").style.display = "block"; //show sleep button
+            document.getElementById("play-button").style.display = "block"; // show play button
+            document.getElementById("stats").style.display = "block"; // show stats 
+            
+            
+            // change Egg image to Tamagotchi after hatching 
+            //create variable to select image Id
+            let backgroundImage = document.getElementById("background-image");
+            let imageUrls = [
+                "/TomoGotchi-Sprites/CatTama.png",
+                "/TomoGotchi-Sprites/BirdTama.png",
+                "/TomoGotchi-Sprites/DogTama.png",
+            ];
+
+            // pick a random image
+            let randomIndex = Math.floor(Math.random() * imageUrls.length);
+            // use that variable to change selected image 
+            backgroundImage.src = imageUrls[randomIndex];
+
         }
     }
     
+    // leveling mechanic, threshhold will double every time you level up
+    levelUp() {
+        this.level++;
+        this.experienceThreshold *= 2;
+        console.log(`Congratulations, ${this.name} has leveled up to level ${this.level}!`);
+    }
+
 
     feed() {
         if(this.nutrition > 0 && this.nutrition < 100) { // Check if nutrition is greater than 0 and less than 100
             this.nutrition += 10; // Increment nutrition by 10
-            console.log("Tamagotchi is fed. Nutrition: " + this.nutrition);
+            console.log("Tamagotchi was fed. Nutrition: " + this.nutrition);
 
-            // add Experience to for playing
+            // add Experience to for feeding
             this.experience += 10;
             console.log(`${myTamagotchi.name} has gained ${this.experience} experience`)
             // If you reach the experience threshold you will level up
             if (this.experience >= this.experienceThreshold) {
                 this.levelUp();
             }
-            
+
         } else if(this.nutrition >= 100) {
             console.log("Tamagotchi is already full. Nutrition: " + this.nutrition);
-        } else {
-            console.log("Tamagotchi is hungry. Nutrition: " + this.nutrition);
         }
     }
 
@@ -106,17 +128,10 @@ class Tamagotchi {
             return;
         }
     }
-       
-    // leveling mechanic, threshhold will double every time you level up
-    levelUp() {
-        this.level++;
-        this.experienceThreshold *= 2;
-        console.log(`Congratulations, ${this.name} has leveled up to level ${this.level}!`);
-    }
 
 }
 
-
+// variable used to store new instances of the tamagotchi
 let myTamagotchi;
 
 // Create our TomoGachi and name it
@@ -164,15 +179,18 @@ function sleep() {
 
 function play() {
     document.getElementById("play-button").style.display = "block"; // sets the play button to be visible
-    document.getElementById("play-button").addEventListener("click", () => { //adds a click event listener to the sleep button
+    document.getElementById("play-button").addEventListener("click", () => { //adds a click event listener to the play button
         myTamagotchi.play(); // calls the play function from the Tamagotchi class
         updateStats()
         // I want to add a cooldown to the button 
     });
 }
 
-
+// update the values on the page for tamagotchis stats
+// grab the elemts by their ID and setting the innerHTML to the value stored in the tamagotchi object.
 function updateStats() {
+    document.getElementById("level-value").innerHTML = myTamagotchi.level;
+    document.getElementById("exp-value").innerHTML = myTamagotchi.experience;
     document.getElementById("nutrition-value").innerHTML = myTamagotchi.nutrition;
     document.getElementById("rest-value").innerHTML = myTamagotchi.rest;
     document.getElementById("boredom-value").innerHTML = myTamagotchi.boredom;
