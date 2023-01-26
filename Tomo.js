@@ -45,18 +45,19 @@ class Tamagotchi {
         if(this.nutrition > 0 && this.nutrition < 100) { // Check if nutrition is greater than 0 and less than 100
             this.nutrition += 10; // Increment nutrition by 10
             console.log("Tamagotchi is fed. Nutrition: " + this.nutrition);
+
+            // add Experience to for playing
+            this.experience += 10;
+            console.log(`${myTamagotchi.name} has gained ${this.experience} experience`)
+            // If you reach the experience threshold you will level up
+            if (this.experience >= this.experienceThreshold) {
+                this.levelUp();
+            }
+            
         } else if(this.nutrition >= 100) {
             console.log("Tamagotchi is already full. Nutrition: " + this.nutrition);
         } else {
             console.log("Tamagotchi is hungry. Nutrition: " + this.nutrition);
-        }
-
-        // add Experience to feeding food
-        this.experience += 10;
-        console.log(`${myTamagotchi.name} has gained ${this.experience} experience`)
-        // If you reach the experience threshold you will level up
-        if (this.experience >= this.experienceThreshold) {
-            this.levelUp();
         }
     }
 
@@ -64,39 +65,48 @@ class Tamagotchi {
         if(this.rest < 100) {
             this.rest = 100; // Fill up the rest to 100
             console.log("Tamagotchi is resting. Rest: " + this.rest);
+
+            // add Experience to for sleeping
+            this.experience += 10;
+            console.log(`${myTamagotchi.name} has gained ${this.experience} experience`)
+            // If you reach the experience threshold you will level up
+            if (this.experience >= this.experienceThreshold) {
+                this.levelUp();
+            }
+        
         } else {
             console.log("Tamagotchi is already well rested. Rest: " + this.rest);
-        }
-
-        // add Experience for sleeping
-        this.experience += 10;
-        console.log(`${myTamagotchi.name} has gained ${this.experience} experience`)
-        // If you reach the experience threshold you will level up
-        if (this.experience >= this.experienceThreshold) {
-            this.levelUp();
         }
     }
 
 
     play() {
         if (this.nutrition > 20 && this.rest > 20) {
-            this.boredom -= 20;
+             // If the Tamagotchi's boredom is going to be less than 0, just set it to 0
+             if (this.boredom - 20 < 0) {
+                this.boredom = 0;
+            } else {
+                this.boredom -= 20;
+            }
+
             this.nutrition -= 20;
             this.rest -= 20
             console.log("Tamagotchi is playing. Boredom: " + this.boredom + " Nutrition: " + this.nutrition + " Rest: " + this.rest);
+    
+            // add Experience to for playing
+            this.experience += 10;
+            console.log(`${myTamagotchi.name} has gained ${this.experience} experience`)
+            // If you reach the experience threshold you will level up
+            if (this.experience >= this.experienceThreshold) {
+                this.levelUp();
+            }
         } else if (this.nutrition <= 20 || this.rest <= 20) {
             console.log("Tamagotchi is too tired to play.");
-        }
-
-        // add Experience to for playing
-        this.experience += 10;
-        console.log(`${myTamagotchi.name} has gained ${this.experience} experience`)
-        // If you reach the experience threshold you will level up
-        if (this.experience >= this.experienceThreshold) {
-            this.levelUp();
+            // exit out of the function if the Tamagotchi is too tired to play
+            return;
         }
     }
-
+       
     // leveling mechanic, threshhold will double every time you level up
     levelUp() {
         this.level++;
