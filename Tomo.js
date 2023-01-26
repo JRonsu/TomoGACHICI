@@ -140,6 +140,8 @@ function createTamagotchi() {
     let name = document.getElementById("name").value; // Get the value of the input 
     myTamagotchi = new Tamagotchi(name); // Create a new Tamagotchi object and assign the input name to it
     console.log(`Your Tamagotchi's name is ${myTamagotchi.name}`); // Log the Tamagotchi's name to the console
+    document.getElementById("tamagotchi-name").innerHTML = myTamagotchi.name;
+
     document.getElementById("create-button").style.display = "none"; // make button disappear after 1 click
     document.getElementById("name").style.display = "none"; // make input disappear after create button press
     document.getElementById("label").style.display = "none";// make label message disappear after create button press
